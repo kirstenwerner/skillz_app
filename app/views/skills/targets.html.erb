@@ -1,0 +1,6 @@
+<h3>Please select a skill target, in order to see each skill you can work on to strengthen that area!</h3>
+
+<ul><% @skills_targets.uniq.each do |target| %>
+    <%= button_to target, skills_target_path(target), :method => "get" %>
+  <% end %>
+</ul>

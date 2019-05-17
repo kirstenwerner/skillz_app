@@ -1,11 +1,7 @@
-<h3>Please select a skill target, in order to see each skill you can work on to strengthen that area!</h3>
-<% skills_targets = [] %>
-<% @skills.each do |skill| %>
-    <% skills_targets << skill.target %>
-<% end %>
+<h2>Skills that work toward strengthening your <%= @target %> action</h2>
 
-<ul><% skills_targets.uniq.each do |target| %>
-  <% @target = target %>
-    <%= button_to target, skill_path(target), :method => "get" %>
+<ul>
+  <% @skills.each do |skill| %>
+    <%= link_to skill.name, skill_path(skill.name), :method => "get" %><br>
   <% end %>
 </ul>

@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  resources :skills do
-    
-  end
 
-  resources :athletes, only: [:index, :show] do
+  resources :workouts
+  get 'skills/targets', :to => 'skills#targets'
+  get 'skills/:target', :to => 'skills#index', as: 'skills_target'
+  get 'skill/:id', :to => 'skills#show', as: 'skill'
+
+  resources :skills, except: [:index]
+
+  resources :athletes do
     resources :skills, only: [:index]
   end
 
