@@ -18,9 +18,12 @@
     </div>
   <% end %>
 
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br><br>
+
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>
-<% end %>
+<% end %><br>
 
-<%= render "devise/shared/links" %>
+<div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div><br>
+<%= button_to "actually click on this button though", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.first), :method => "get" %>
