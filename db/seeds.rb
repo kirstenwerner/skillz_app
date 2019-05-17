@@ -30,12 +30,12 @@ DATA = {
     ["ring push-ups", "push"],
     ["ring deep push-ups", "push"],
     ["ring one arm push-ups", "push"],
-    ["one arm push-ups"],
+    ["one arm push-ups", "push"],
     ["dip support", "push"],
     ["dips", "push"],
     ["weighted dips", "push"],
     ["ring dips", "push"],
-    ["ring deep dips"],
+    ["ring deep dips", "push"],
     ["weighted ring dips", "push"],
     ["military press", "push"],
     ["pike wall handstand", "push"],
@@ -121,7 +121,7 @@ def make_skills
     skill.each_with_index do |attribute, i|
       new_skill.send(DATA[:skills_keys][i] + "=", attribute)
     end
-    new_skill.save 
+    new_skill.save
   end
 end
 
