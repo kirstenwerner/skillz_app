@@ -6,7 +6,7 @@ class SkillsController < ApplicationController
   end
 
   def show
-    @skill = Skill.find_by(name: params[:id])
+    @skill = Skill.find(params[:id])
   end
 
   def targets

@@ -1,3 +1,5 @@
 <h2><%= @skill.name %></h2>
 
-<%= @skill.description %>
+<% @skill.description.split(" / ").each do |text| %>
+  <%= text %><br /><br />
+<% end %>
