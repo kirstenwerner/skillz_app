@@ -1,5 +1,5 @@
 <h1>Registered Athletes</h1>
-<ul><% @users.each do |user| %>
+<ul><% @athletes.each do |user| %>
   <%= user.first_name %> <%= user.last_name %> - <%= link_to "Workout Records", athlete_skills_path(user) %><br>
   <% end %>
 </ul>

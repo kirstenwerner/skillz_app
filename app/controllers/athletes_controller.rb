@@ -1,7 +1,9 @@
 class AthletesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :current_user, only: [:show]
 
   def index
-    @users = User.all
+    @athletes = User.all
   end
 
   def show
