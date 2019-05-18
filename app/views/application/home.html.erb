@@ -2,10 +2,11 @@
 <img src="/images/LA-Chinup.jpg" alt="chin-up" /><br>
 
 <%= button_to "Skills", skills_targets_path, :method => :get %>
-<%= button_to "Daily Workout", skills_path, :method => "get" %>
-<%= button_to "Personal Records", skills_path, :method => "get" %>
+<%= button_to "Daily Workout", workout_path(@daily_workout.last.id), :method => "get" %>
+<%= button_to "Personal Records", athlete_path(current_user.id), :method => "get" %>
 
 
 <% if current_user.coach? %>
   <%= button_to "Create Workout", new_workout_path, :method => "get" %>
+  <%= button_to "View Athletes", athletes_path, :method => "get" %>
 <% end %>

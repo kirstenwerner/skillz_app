@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def home
+    @daily_workout = Workout.today
   end
 
   def after_sign_in_path_for(resource)
