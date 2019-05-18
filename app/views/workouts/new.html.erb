@@ -6,11 +6,11 @@
   <% @targets.each do |t| %>
     <%= f.label :skill, t %>
     <br>
-    <%= collection_select "workout[#{t}]", "skill_1", Skill.for_target(t), :id, :name, multiple: true %>
+    <%= collection_select "workout[#{t}]", "skill_1", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
     <br>
-    <%= collection_select "workout[#{t}]", "skill_2", Skill.for_target(t), :id, :name, multiple: true %>
+    <%= collection_select "workout[#{t}]", "skill_2", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
     <br>
-    <%= collection_select "workout[#{t}]", "skill_3", Skill.for_target(t), :id, :name, multiple: true %>
+    <%= collection_select "workout[#{t}]", "skill_3", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
     <br><br>
 
   <% end %>
