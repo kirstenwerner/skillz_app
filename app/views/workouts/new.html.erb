@@ -1,31 +1,23 @@
 <h2>Write today's workout!</h2>
 <h4>PICK UP TO 3 SKILLS FOR EACH TARGET ACTION</h4>
 
-<%= form_for(@workout) do |f| %>
+<%= form_for @workout, as: :skills do |f| %>
 
-  <% @targets.each do |target| %>
+  <% @targets.each do |t| %>
+    <%= f.label :skill, t %>
+    <br>
+    <%= collection_select "workout[#{t}]", "skill_1", Skill.for_target(t), :id, :name, multiple: true %>
+    <br>
+    <%= collection_select "workout[#{t}]", "skill_2", Skill.for_target(t), :id, :name, multiple: true %>
+    <br>
+    <%= collection_select "workout[#{t}]", "skill_3", Skill.for_target(t), :id, :name, multiple: true %>
+    <br><br>
 
-    <strong><%= target %></strong>
-
-    <%= f.fields_for "skills[]", skills do |s| %>
-      <div class="field">
-        <%= s.collection_select(:workout_skills,
-              @skills.select{|skill| skill.target == target || skill.name == "none"},
-              :id, :name) %>
-      </div>
-
-      <div class="field">
-        <%= s.collection_select(:workout_skills, @skills.select{|skill| skill.target == target || skill.name == "none"}, :id, :name) %>
-      </div>
-
-      <div class="field">
-        <%= s.collection_select(:workout_skills, @skills.select{|skill| skill.target == target || skill.name == "none"}, :id, :name) %>
-      </div><br>
-    <% end %>
   <% end %>
 
-<div class="actions">
-  <%= f.submit "Publish Workout" %>
-</div>
+  <div class="actions">
+    <%= f.submit "Publish Workout" %>
+  </div>
+
 
 <% end %>
