@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :workouts
+  resources :workouts do
+    resources :workout_skills, only: [:new, :create]
+  end
+
   get 'skills/targets', :to => 'skills#targets'
   get 'skills/:target', :to => 'skills#index', as: 'skills_target'
   get 'skill/:id', :to => 'skills#show', as: 'skill'
