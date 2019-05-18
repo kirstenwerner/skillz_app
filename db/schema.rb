@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_193416) do
+ActiveRecord::Schema.define(version: 2019_05_17_182958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_193416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "target"
+    t.integer "workout_ids", default: [], array: true
   end
 
   create_table "user_skills", force: :cascade do |t|
@@ -50,6 +51,19 @@ ActiveRecord::Schema.define(version: 2019_05_16_193416) do
     t.index ["provider"], name: "index_users_on_provider"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid"], name: "index_users_on_uid"
+  end
+
+  create_table "workout_skills", force: :cascade do |t|
+    t.integer "workout_id"
+    t.integer "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workouts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "coach_id"
   end
 
 end
