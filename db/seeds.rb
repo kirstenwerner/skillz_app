@@ -19,9 +19,9 @@ DATA = {
     ["Rachel", "Tosic", "rachel@mail.com", "password", 20, 110, false]
   ],
   :skills_keys =>
-    ["name", "target"],
+    ["name", "description", "target"],
   :skills => [
-    ["squats", "hips"],
+    ["squats", "Establish a squat stance with your feet slightly wider than your hips and turned out 5 – 10 degrees. Take a breath in and squeeze your abdomen to brace your spine in a neutral position. Pull your shoulders back and down to stabilize your upper back, reach your arms forward for balance. Push your hips back, keeping shins vertical as far down as possible. Drive your knees out laterally by screwing your feet into the ground and pull yourself into the bottom position of the squat. / Be sure to only go as low as you can while still maintaining a neutral lumbar spine. / Continue to make an effort to drive your knees out by screwing the feet into the ground. Return to standing the same way you entered your squat. As you stand be sure to reclaim your normal standing position." "hips"],
     ["barbell squat", "hips"],
     ["barbell back squat", "hips"],
     ["single leg squats", "hips"],
