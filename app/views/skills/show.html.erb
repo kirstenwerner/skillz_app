@@ -1,5 +1,9 @@
 <h2><%= @skill.name %></h2>
 
-<% @skill.description.split(" / ").each do |text| %>
-  <%= text %><br /><br />
+<% if !@skill.description.nil? %>
+  <% @skill.description.split(" / ").each do |text| %>
+    <%= text %><br /><br />
+  <% end %>
+<% else %>
+  <p>Sorry! There is no description for this skill yet.</p>
 <% end %>

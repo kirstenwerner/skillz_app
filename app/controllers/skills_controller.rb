@@ -1,4 +1,5 @@
 class SkillsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @target = params[:target]
@@ -6,7 +7,11 @@ class SkillsController < ApplicationController
   end
 
   def show
-    @skill = Skill.find(params[:id])
+    if params[:id].to_i == 0
+      @skill = Skill.find_by(name: params[:id])
+    else
+      @skill = Skill.find(params[:id])
+    end
   end
 
   def targets
