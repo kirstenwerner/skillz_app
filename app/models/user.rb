@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   has_many :user_skills
   has_many :skills, through: :user_skills
+  
+  has_many :workout_users
+  has_many :workouts, through: :workout_users
+
 
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
