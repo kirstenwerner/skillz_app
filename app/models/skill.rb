@@ -3,6 +3,7 @@ class Skill < ApplicationRecord
   has_many :users, through: :user_skills
   has_many :workout_skills
   has_many :workouts, through: :workout_skills
+  accepts_nested_attributes_for :workout_skills
 
 
   def self.for_target(target)
