@@ -1,10 +1,15 @@
 <h2>Daily Workout for <%= @workout.date%></h2>
 
 <% @targets.each do |target| %>
-  <h4><%= target %><?h4><br />
-  <% @skills.each do |skill| %>
+  <h3><%= target %></h3>
+  <% @skills.each.with_index do |skill, i| %>
     <% if skill.target == target %>
-      <%= link_to skill.name, skill_path(skill) %><br />
+      <%= link_to skill.name, skill_path(skill) %>: <%= @work[i] %><br />
     <% end %>
   <% end %>
+<% end %><br />
+
+<% if current_user.coach? %>
+  <%= button_to "Edit Workout", edit_workout_path, :method => "get" %>
+  <%= button_to "Delete Workout", workout_path, :method => "delete" %>
 <% end %>
