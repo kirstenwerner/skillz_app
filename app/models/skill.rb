@@ -1,6 +1,7 @@
 class Skill < ApplicationRecord
-  has_many :user_skills
-  has_many :users, through: :user_skills
+  validates :name, presence: true
+  validates :target, presence: true
+
   has_many :workout_skills
   has_many :workouts, through: :workout_skills
   accepts_nested_attributes_for :workout_skills
