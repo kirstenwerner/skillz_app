@@ -1,0 +1,28 @@
+<h2>Edit today's workout!</h2>
+
+<%= form_for @workout, as: :skills do |f| %>
+
+  <% @targets.each do |t| %>
+    <%= f.label :skill, t %>
+    <br>
+
+    <%= collection_select "workout[#{t}]", "skill_1", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
+    <%= text_field "workout[#{t}]", "skill_1_work", placeholder: "weight, reps, or time" %>
+    <br>
+
+    <%= collection_select "workout[#{t}]", "skill_2", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
+    <%= text_field "workout[#{t}]", "skill_2_work", placeholder: "weight, reps, or time" %>
+    <br>
+
+    <%= collection_select "workout[#{t}]", "skill_3", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
+    <%= text_field "workout[#{t}]", "skill_3_work", placeholder: "weight, reps, or time" %>
+    <br><br>
+
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Update Workout" %>
+  </div>
+
+
+<% end %>

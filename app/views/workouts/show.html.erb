@@ -1,12 +1,21 @@
 <h2>Daily Workout for <%= @workout.date%></h2>
 
+<%= form_for @workout, as: :users, url: workouts_complete_path  do |f| %>
+  Mark this workout as completed! <%= f.check_box :users %><br>
+
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div><br>
+
+<% end %>
+
 <% @targets.each do |target| %>
-  <h3><%= target %></h3>
+  <strong><%= target %></strong><br>
   <% @skills.each.with_index do |skill, i| %>
     <% if skill.target == target %>
       <%= link_to skill.name, skill_path(skill) %>: <%= @work[i] %><br />
     <% end %>
-  <% end %>
+  <% end %><br>
 <% end %><br />
 
 <% if current_user.coach? %>
