@@ -1,6 +1,6 @@
 <h2>Edit today's workout!</h2>
 
-<%= form_for @workout, as: :skills do |f| %>
+<%= form_for @workout, as: :skills, url: coach_workout_path(current_user, @workout) do |f| %>
 
   <% @targets.each do |t| %>
     <%= f.label :skill, t %>

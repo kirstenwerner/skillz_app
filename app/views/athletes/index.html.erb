@@ -1,5 +1,9 @@
 <h1>Registered Athletes</h1>
 <ul><% @athletes.each do |user| %>
-  <%= user.first_name %> <%= user.last_name %> - <%= link_to "Workout Records", athlete_skills_path(user) %><br>
+  <% if current_user.coach? %>
+    <%= button_to "Delete Athlete", athlete_path(user), :method => "delete", form: {style: 'display:inline-block;'} %>
+  <% end %>
+
+  <%= user.first_name %> <%= user.last_name %> - <%= link_to "Workout Records", athlete_workouts_path(user.id) %><br>
   <% end %>
 </ul>

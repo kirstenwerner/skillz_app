@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
 
-  resources :workouts do
-    resources :workout_skills, only: [:new, :create]
+  resources :athletes, only: [:index, :show, :destroy] do
+    resources :workouts, only: [:index, :show]
+  end
+
+  resources :workouts, only: [:index, :show]
+
+  resources :coach, only: [], controller: 'workouts', as: 'coach' do
+    resources :workouts, only: [:new, :create, :edit, :update, :destroy]
   end
 
   get 'skills/targets', :to => 'skills#targets'
   get 'skills/:target', :to => 'skills#index', as: 'skills_target'
   get 'skill/:id', :to => 'skills#show', as: 'skill'
 
-  resources :skills, except: [:index]
+  resources :skills, only: [:show]
 
-  resources :athletes do
-    resources :skills, only: [:index]
-  end
 
   devise_for :users, :controllers => { registrations: 'registrations', :omniauth_callbacks => "users/omniauth_callbacks" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "application#home"
+
+  patch 'workouts/:id/complete', :to => 'workouts#complete', as: 'workouts_complete'
 end

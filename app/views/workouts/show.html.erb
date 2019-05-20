@@ -1,7 +1,7 @@
 <h2>Daily Workout for <%= @workout.date%></h2>
 
 <%= form_for @workout, as: :users, url: workouts_complete_path  do |f| %>
-  Mark this workout as completed! <%= f.check_box :users %><br>
+  Mark this workout as completed! <%= f.check_box :users %>
 
   <div class="actions">
     <%= f.submit "Submit" %>
@@ -19,6 +19,6 @@
 <% end %><br />
 
 <% if current_user.coach? %>
-  <%= button_to "Edit Workout", edit_workout_path, :method => "get" %>
-  <%= button_to "Delete Workout", workout_path, :method => "delete" %>
+  <%= button_to "Edit Workout", edit_coach_workout_path(current_user), :method => "get" %>
+  <%= button_to "Delete Workout", coach_workout_path(current_user), :method => "delete" %>
 <% end %>

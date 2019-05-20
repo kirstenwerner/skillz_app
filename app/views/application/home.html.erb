@@ -8,6 +8,6 @@
 
 
 <% if current_user.coach? %>
-  <%= button_to "Create Workout", new_workout_path, :method => "get" %>
+  <%= button_to "Create Workout", new_coach_workout_path(current_user), :method => "get" %>
   <%= button_to "View Athletes", athletes_path, :method => "get" %>
 <% end %>
