@@ -26,4 +26,4 @@
 <% end %><br>
 
 <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div><br>
-<%= button_to "actually click on this button though", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.first), :method => "get" %>
+<%= button_to "Log in with Facebook", omniauth_authorize_path(resource_name, resource_class.omniauth_providers.first), :method => "get" %>
