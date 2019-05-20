@@ -8,7 +8,13 @@ class AthletesController < ApplicationController
 
   def show
     @athlete = User.find(params[:id])
-    @workouts = @athlete.workouts 
+    @workouts = @athlete.workouts
+  end
+
+  def destroy
+    @athlete = User.find(params[:id])
+    @athlete.destroy
+    redirect_to athletes_path, alert: "You have successfully un-registered #{@athlete.first_name} #{@athlete.last_name}"
   end
 
   private
