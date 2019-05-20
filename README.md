@@ -4,8 +4,11 @@ Made as the portfolio project for the Sinatra section of the Flatiron School onl
 ## Installing
 Fork and clone from https://github.com/kirstenwerner/skillz_app
 install gems by running: bundle install
-Run rake db:seed
-Open local browser by running rails s
+
+Run: rake db:seed
+
+Open local browser by running: rails s
+
 Navigate to https://localhost:3000
 
 ## Contributing
