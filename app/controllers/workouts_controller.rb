@@ -14,14 +14,14 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    # if Workout.today
-    #   redirect_to root_path, alert: "A workout has already been created for today!"
-    # else
+    if Workout.today
+      redirect_to root_path, alert: "A workout has already been created for today!"
+    else
       @workout = Workout.new
       18.times{@workout.skills.build}
       @skills = Skill.all
       @targets = @skills.map{|skill| skill.target}.uniq
-    # end
+    end
   end
 
   def create
