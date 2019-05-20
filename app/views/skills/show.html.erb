@@ -1,9 +1,10 @@
 <h2><%= @skill.name %></h2>
 
 <iframe title="vimeo-player"
-src=@skill.demo 
+src=<%=@video%>
 width="640" height="360" frameborder="0"
 allowfullscreen></iframe><br><br>
+
 
 <% if !@skill.description.nil? %>
   <% @skill.description.split(" / ").each do |text| %>

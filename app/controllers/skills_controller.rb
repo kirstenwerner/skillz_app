@@ -10,6 +10,7 @@ class SkillsController < ApplicationController
     if @skill = Skill.find_by(name: params[:id])
     else @skill = Skill.find(params[:id])
     end
+    @video = "https://player.vimeo.com/video/" + @skill.demo.split("/").last
   end
 
   def targets
