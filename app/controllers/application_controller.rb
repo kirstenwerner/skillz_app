@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   def home
     @daily_workout = Workout.today
+    @path = workout_path(@daily_workout)
+    if @daily_workout == []
+      @path = root_path
+    end
   end
 
   def after_sign_in_path_for(resource)
