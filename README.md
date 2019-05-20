@@ -12,7 +12,7 @@ Navigate to https://localhost:3000
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/'awesome-entropy-8020'/seattle_restaurant_rememberall. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kirstenwerner/skillz_app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Authors
 
