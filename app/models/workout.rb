@@ -1,13 +1,11 @@
 class Workout < ApplicationRecord
   has_many :workout_skills
   has_many :skills, through: :workout_skills
+  has_many :workout_users
+  has_many :users, through: :workout_users
 
   accepts_nested_attributes_for :workout_skills
   accepts_nested_attributes_for :skills
-
-  has_many :workout_users
-  has_many :users, through: :workout_users
-  
   accepts_nested_attributes_for :workout_users
   accepts_nested_attributes_for :users
 
@@ -16,6 +14,6 @@ class Workout < ApplicationRecord
   end
 
   def self.today
-    @workout = Workout.where({ created_at: (Time.now.midnight - 1.day)..Time.now.midnight })
+    @workout = Workout.where({ created_at: (Time.now.midnight)..Time.now.midnight + 1.day})
   end
 end

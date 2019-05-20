@@ -1,4 +1,4 @@
-class WorkoutAthlete < ApplicationRecord
+class WorkoutUser < ApplicationRecord
   belongs_to :user
   belongs_to :workout
 end
