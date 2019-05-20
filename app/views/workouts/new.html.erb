@@ -1,7 +1,22 @@
 <h2>Write today's workout!</h2>
 <h4>PICK UP TO 3 SKILLS FOR EACH TARGET ACTION</h4>
 
-<%= form_for @workout, as: :skills do |f| %>
+<% if @workout.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@workout.errors.count, "error") %>
+      prohibited this workout from being saved:
+    </h2>
+
+    <ul>
+    <% @workout.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for @workout, as: :skills, url: coach_workouts_path(:coach_id) do |f| %>
 
   <% @targets.each do |t| %>
     <%= f.label :skill, t %>
