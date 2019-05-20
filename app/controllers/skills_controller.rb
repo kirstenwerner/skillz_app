@@ -7,10 +7,8 @@ class SkillsController < ApplicationController
   end
 
   def show
-    if params[:id].to_i == 0
-      @skill = Skill.find_by(name: params[:id])
-    else
-      @skill = Skill.find(params[:id])
+    if @skill = Skill.find_by(name: params[:id])
+    else @skill = Skill.find(params[:id])
     end
   end
 
