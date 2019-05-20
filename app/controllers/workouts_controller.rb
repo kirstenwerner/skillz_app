@@ -3,7 +3,14 @@ class WorkoutsController < ApplicationController
   before_action :coach?, except: [:index, :show, :complete]
 
   def index
-    @workouts = Workout.all
+    if params[:athlete_id]
+      @workouts = User.find(params[:athlete_id]).workouts
+      if @workouts == []
+        flash[:alert] = "This athlete has not logged any workouts yet"
+      end
+    else
+      @workouts = Workout.all
+    end
   end
 
   def new
@@ -12,53 +19,37 @@ class WorkoutsController < ApplicationController
     # else
       @workout = Workout.new
       18.times{@workout.skills.build}
-      @skills = Skill.all + [Skill.new(name: "none")]
-      @targets = @skills.map{|skill| skill.target}.uniq - [nil]
+      @skills = Skill.all
+      @targets = @skills.map{|skill| skill.target}.uniq
     # end
   end
 
   def create
     @workout = Workout.new
     @workout.coach_id = current_user.id
-    skills = []
-    skill_work = []
-    params[:workout].values.each do |skill_hash|
-      skill_hash.each do |key, value|
-        if !key.include? "work"
-          skills << Skill.find(value) unless value.to_i == 0
-        else
-          skill_work << value unless value == ""
-        end
-      end
-    end
-    @workout.skills << skills
+    Workout.create_or_update_skills(@workout, params[:workout])
     if @workout.save
-      @workout.skills.each_with_index do |skill, i|
-        @workout.workout_skills[i].work = skill_work[i]
-      end
-      @workout.save
+      Workout.create_or_update_work(@workout)
       redirect_to workout_path(@workout)
     else
-      render :new
+      redirect_to new_coach_workout_path(@workout.coach_id)
     end
   end
 
   def show
-    # if params[:athlete_id]
-    #   @workout = Workout.find(params[:athlete_id])
-    # else
-    if  @workout = Workout.find(params[:id])
-    # end
-    # if !@workout == nil
+    @workout = Workout.find(params[:id])
+    if @workout.id
       @skills = @workout.skills
       @work = []
 
       @workout.workout_skills.each do |ws|
         @work << ws.work
       end
+
       @targets = @skills.map{|skill| skill.target}.uniq
     else
-      redirect_to root_path, alert: "No workout has been posted yet for today."
+      flash[:alert] = "Today's workout has not yet been set!"
+      redirect_to root_path
     end
   end
 
@@ -69,14 +60,29 @@ class WorkoutsController < ApplicationController
   end
 
   def update
+    @workout = Workout.find(params[:id])
+    @workout.skills = []
+    @workout.workout_skills = []
+    Workout.create_or_update_skills(@workout, params[:workout])
+    if @workout.save
+      Workout.create_or_update_work(@workout)
+      redirect_to workout_path(@workout)
+    else
+      flash[:alert] = "The workout was unable to be updated"
+      redirect_to workout_path(@workout)
+    end
   end
 
   def complete
     @workout = Workout.find(params[:id])
     if params[:users][:users].to_i == 1
       @workout.users << current_user unless current_user.workouts.include?(@workout)
+      flash[:alert] = "You've successfully added #{@workout.date}'s workout to your completed workout log!"
     else
-      @workout.users - [current_user]
+      if @workout.users.include?(current_user)
+        @workout.users.delete(current_user)
+        flash[:alert] = "You've removed the workout from #{@workout.date} from your workout log"
+      end
     end
     @workout.save
     redirect_to athlete_path(current_user)
