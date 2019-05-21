@@ -33,7 +33,7 @@
     ### URL coach/:coach_id/workouts/new
 
 
-##Confirm:
+## Confirm:
 - [x] The application is pretty DRY
 
 - [x] Limited logic in controllers
