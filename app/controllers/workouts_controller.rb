@@ -14,7 +14,7 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    if Workout.today
+    if !Workout.today.empty?
       redirect_to root_path, alert: "A workout has already been created for today!"
     else
       @workout = Workout.new
