@@ -8,7 +8,13 @@ class AthletesController < ApplicationController
 
   def show
     @athlete = User.find(params[:id])
-    @workouts = @athlete.workouts
+    if @athlete == current_user
+      @workouts = @athlete.workouts
+    elsif current_user.coach?
+      @workouts = @athlete.workouts
+    else
+      redirect_to root_path, alert: "You may only view your own workout records"
+    end 
   end
 
   def destroy
