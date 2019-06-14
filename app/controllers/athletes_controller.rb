@@ -1,9 +1,18 @@
 class AthletesController < ApplicationController
   before_action :authenticate_user!
-  before_action :current_user, only: [:show]
+  before_action :current_user
 
   def index
-    @athletes = User.all
+    if current_user.coach?
+      @athletes = User.all
+      respond_to do |f|
+        f.html {render :index}
+        f.json {render json: @athletes}
+      end
+    else
+      flash[:error] = "Only coaches have access to athlete data"
+      redirect_to root_path
+    end
   end
 
   def show
@@ -14,7 +23,7 @@ class AthletesController < ApplicationController
       @workouts = @athlete.workouts
     else
       redirect_to root_path, alert: "You may only view your own workout records"
-    end 
+    end
   end
 
   def destroy
