@@ -16,35 +16,9 @@ document.addEventListener("turbolinks:load", function() {
     }
     if (e.target.className === "skills"){
       const skillId = e.target.id
-      fetch(`http://localhost:3000/skill/${skillId}.json`)
-      .then(resp => resp.json())
-      .then(data => {
-        const skillShow = document.getElementById("skill-show")
-        let div = ""
-        let i = 0
-        let videoRef = data.demo.split("/").pop()
-
-        div = `<center><strong><h2>${data.name}</h2></strong><br>`
-
-        if  (data.demo === "") {
-          div += `<p>Sorry! There is no video demonstration for this skill.</p>`
-        } else {
-          div += `<iframe title="vimeo-player"
-          src="https://player.vimeo.com/video/${videoRef}"
-          width="640" height="360" frameborder="0"
-          allowfullscreen></iframe><br><br>`
-        }
-
-        if (data.description != "") {
-          let desc = data.description.split("/")
-          for (i = 0; i < desc.length; i++) {
-            div += `${desc[i]}<br><br>`
-          }
-        } else {
-          div += `<p>Sorry! There is no description for this skill yet.</p>`
-        }
-        skillShow.innerHTML = div + `</canter>`
-      })
+      let skill = findSkillById(skillId)
+      const skillShow = document.getElementById("skill-show")
+      skillShow.innerHTML = skill.formatSkill(skill)
     }
   })
 
@@ -69,6 +43,42 @@ document.addEventListener("turbolinks:load", function() {
       this.demo = obj.demo
       allSkills.push(this)
     }
+  }
+
+  function findSkillById(skillId) {
+    for (var i = 0; i < allSkills.length; i++) {
+      if (allSkills[i].id == skillId) {
+        return allSkills[i];
+      }
+    }
+  }
+
+  Skill.prototype.formatSkill = function(skill) {
+    let div = ""
+    let i = 0
+    let videoRef = skill.demo.split("/").pop()
+
+    div = `<center><strong><h2>${skill.name}</h2></strong><br>`
+
+    if  (skill.demo === "") {
+      div += `<p>Sorry! There is no video demonstration for this skill.</p>`
+    } else {
+      div += `<iframe title="vimeo-player"
+      src="https://player.vimeo.com/video/${videoRef}"
+      width="640" height="360" frameborder="0"
+      allowfullscreen></iframe><br><br>`
+    }
+
+    if (skill.description != "") {
+      let desc = skill.description.split("/")
+      for (i = 0; i < desc.length; i++) {
+        div += `${desc[i]}<br><br>`
+      }
+    } else {
+      div += `<p>Sorry! There is no description for this skill yet.</p>`
+    }
+    div + `</canter>`
+    return div
   }
 
 });
