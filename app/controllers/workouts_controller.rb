@@ -11,17 +11,21 @@ class WorkoutsController < ApplicationController
     else
       @workouts = Workout.all
     end
+    respond_to do |f|
+      f.html {render :index}
+      f.json {render json: @workouts}
+    end
   end
 
   def new
-    if !Workout.today.empty?
-      redirect_to root_path, alert: "A workout has already been created for today!"
-    else
+    # if !Workout.today.empty?
+    #   redirect_to root_path, alert: "A workout has already been created for today!"
+    # else
       @workout = Workout.new
       18.times{@workout.skills.build}
       @skills = Skill.all
       @targets = @skills.map{|skill| skill.target}.uniq
-    end
+    # end
   end
 
   def create
@@ -30,7 +34,7 @@ class WorkoutsController < ApplicationController
     Workout.create_or_update_skills(@workout, params[:workout])
     if @workout.save
       Workout.create_or_update_work(@workout)
-      redirect_to workout_path(@workout)
+      render json: @workout, status: 201
     else
       redirect_to new_coach_workout_path(@workout.coach_id)
     end
@@ -50,6 +54,10 @@ class WorkoutsController < ApplicationController
     else
       flash[:alert] = "Today's workout has not yet been set!"
       redirect_to root_path
+    end
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @workout, status: 200}
     end
   end
 
@@ -103,6 +111,6 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout).permit(:id, :coach_id, skill_attributes:[:name, :description, :target])
+    params.require(:workout).permit(:id, :coach_id, skill_attributes:[:name, :description, :target], workout_skill_attributes:[:work])
   end
 end
