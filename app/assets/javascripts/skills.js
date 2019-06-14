@@ -1,21 +1,18 @@
 document.addEventListener("turbolinks:load", function() {
 
   const body = document.querySelector("body")
+  getSkills()
   body.addEventListener("click", function(e) {
     if (e.target.className === "skills-js"){
       const skillsTarget = e.target.dataset.target
-      fetch(`http://localhost:3000/skills/targets.json`)
-      .then(resp => resp.json())
-      .then(data => {
         const show = document.getElementById("target-skill-show")
         let div = ""
         let i
-        for (i = 0; i < data.length; i++) {
-          if (data[i].target === skillsTarget)
-          div += `<div class="skills" id="${data[i].id}">${data[i].name}</div>`
+        for (i = 0; i < allSkills.length; i++) {
+          if (allSkills[i].target === skillsTarget)
+          div += `<div class="skills" id="${allSkills[i].id}">${allSkills[i].name}</div>`
         }
         show.innerHTML = '<br><center>' + div + '</center><br>'
-      })
     }
     if (e.target.className === "skills"){
       const skillId = e.target.id
@@ -50,4 +47,28 @@ document.addEventListener("turbolinks:load", function() {
       })
     }
   })
+
+  function getSkills() {
+    fetch(`http://localhost:3000/skills/targets.json`)
+    .then(resp => resp.json())
+    .then(data => {
+      data.map(skill => {
+        const newSkill = new Skill(skill)
+      })
+    })
+  }
+
+  allSkills = []
+
+  class Skill {
+    constructor(obj) {
+      this.id = obj.id
+      this.name = obj.name
+      this.description = obj.description
+      this.target = obj.target
+      this.demo = obj.demo
+      allSkills.push(this)
+    }
+  }
+
 });
