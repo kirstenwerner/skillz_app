@@ -1,7 +1,7 @@
-<h2>Skills that work toward strengthening your <%= @target %> action</h2>
+<center><h2>Skills that work toward strengthening your <%= @target %> action</h2></center>
 
 <ul>
   <% @skills.each do |skill| %>
-    <%= link_to skill.name, skill_path(skill.name), :method => "get" %><br>
+    <center><%= link_to skill.name, skill_path(skill.name), :method => "get", :id => "skill-link" %></center><br>
   <% end %>
 </ul>

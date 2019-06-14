@@ -1,6 +1,11 @@
-<h3>Please select a skill target, in order to see each skill you can work on to strengthen that area!</h3>
+<div id="skill-show">
+    <h3>Please select a skill target, in order to see each skill you can work on to strengthen that area!</h3><br>
+</div>
 
-<ul><% @skills_targets.uniq.each do |target| %>
-    <%= button_to target, skills_target_path(target), :method => "get" %>
+<div id="target-skill-show">
+</div>
+
+  <center><ul><% @skills_targets.uniq.each do |target| %>
+    <button class="skills-js" data-target="<%= target %>"><%= target%></button>
   <% end %>
-</ul>
+  </ul></center>

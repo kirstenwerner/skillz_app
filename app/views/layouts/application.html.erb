@@ -6,9 +6,16 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': true %>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/style.css" media="screen" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Raleway&display=swap" rel="stylesheet">
+
   </head>
-  <p class="navbar-text pull-right">
+  
+  <p class="navbar-text pull-center">
     <% if user_signed_in? %>
       Logged in as <strong><%= current_user.first_name %></strong> |
       <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
@@ -21,7 +28,11 @@
   </p>
 
   <body>
-    <%= render 'layouts/alerts'%>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><strong><%= value %></strong></div>
+    <% end %>
+
     <%= yield %>
+
   </body>
 </html>

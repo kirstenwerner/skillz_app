@@ -1,12 +1,16 @@
 <h2><%= @skill.name %></h2>
 
-<iframe title="vimeo-player"
-src=<%=@video%>
-width="640" height="360" frameborder="0"
-allowfullscreen></iframe><br><br>
+<% if @skill.demo != "" %>
+  <iframe title="vimeo-player"
+  src=<%=@video%>
+  width="640" height="360" frameborder="0"
+  allowfullscreen></iframe><br><br>
+<% else %>
+  <p>Sorry! There is no video demonstration for this skill.</p>
+<% end %>
 
 
-<% if !@skill.description.nil? %>
+<% if @skill.description != "" %>
   <% @skill.description.split(" / ").each do |text| %>
     <%= text %><br /><br />
   <% end %>

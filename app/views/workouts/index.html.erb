@@ -1,8 +1,12 @@
 <h2>Archived Workouts</h2>
-<p><strong>Select a date to see the workout from that day</strong></p><br>
+
+<div id="workout-show"></div>
 
 <ul>
   <% @workouts.each do |workout| %>
-    <%= link_to workout.date, workout_path(workout) %><br />
+    <div id="workout-<%= workout.id %>">
+      <p><%= workout.date %> <button class="workout-js" data-id="<%= workout.id %>">See Workout</button></p>
+    </div>
   <% end %>
+
 </ul>

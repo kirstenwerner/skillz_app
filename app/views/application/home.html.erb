@@ -1,13 +1,12 @@
-<h1>Welcome to Skillz Gym</h1>
-<img src="/images/LA-Chinup.jpg" alt="chin-up" /><br>
+<center><h1>Welcome to Skillz Gym</h1></center>
+<center><img src="/images/LA-Chinup.jpg" alt="chin-up" /><br></center>
 
-<%= button_to "Skills", skills_targets_path, :method => :get %>
-<%= button_to "Daily Workout", @path, :method => "get" %>
-<%= button_to "Archived Workouts", workouts_path, :method => "get" %>
-<%= button_to "Workout Log", athlete_path(current_user.id), :method => "get" %>
+    <center><%= button_to "Skills", skills_targets_path, :method => :get %></center>
+    <center><%= button_to "Daily Workout", @path, :method => "get" %></center>
+    <center><%= button_to "Archived Workouts", workouts_path, :method => "get" %></center>
+    <center><%= button_to "Workout Log", athlete_path(current_user.id), :method => "get" %></center>
 
-
-<% if current_user.coach? %>
-  <%= button_to "Create Workout", new_coach_workout_path(current_user), :method => "get" %>
-  <%= button_to "View Athletes", athletes_path, :method => "get" %>
-<% end %>
+    <% if current_user.coach? %>
+      <center><%= button_to "Create Workout", new_coach_workout_path(current_user), :method => "get" %></center>
+      <center><%= button_to "View Athletes", athletes_path, :method => "get" %></center>
+    <% end %>

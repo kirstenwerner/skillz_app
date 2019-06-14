@@ -1,44 +1,46 @@
-<h2>Write today's workout!</h2>
-<h4>PICK UP TO 3 SKILLS FOR EACH TARGET ACTION</h4>
+<div id="new-workout-div">
+  <h2>Write today's workout!</h2>
+  <h4>PICK UP TO 3 SKILLS FOR EACH TARGET ACTION</h4>
 
-<% if @workout.errors.any? %>
-  <div id="error_explanation">
-    <h2>
-      <%= pluralize(@workout.errors.count, "error") %>
-      prohibited this workout from being saved:
-    </h2>
+  <% if @workout.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@workout.errors.count, "error") %>
+        prohibited this workout from being saved:
+      </h2>
 
-    <ul>
-    <% @workout.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<%= form_for @workout, as: :skills, url: coach_workouts_path(:coach_id) do |f| %>
-
-  <% @targets.each do |t| %>
-    <%= f.label :skill, t %>
-    <br>
-
-    <%= collection_select "workout[#{t}]", "skill_1", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
-    <%= text_field "workout[#{t}]", "skill_1_work", placeholder: "weight, reps, or time" %>
-    <br>
-
-    <%= collection_select "workout[#{t}]", "skill_2", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
-    <%= text_field "workout[#{t}]", "skill_2_work", placeholder: "weight, reps, or time" %>
-    <br>
-
-    <%= collection_select "workout[#{t}]", "skill_3", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
-    <%= text_field "workout[#{t}]", "skill_3_work", placeholder: "weight, reps, or time" %>
-    <br><br>
-
+      <ul>
+      <% @workout.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Publish Workout" %>
-  </div>
+  <%= form_for @workout, as: :skills, url: coach_workouts_path(:coach_id) do |f| %>
+
+    <% @targets.each do |t| %>
+      <%= f.label :skill, t %>
+      <br>
+
+      <%= collection_select "workout[#{t}]", "skill_1", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
+      <%= text_field "workout[#{t}]", "skill_1_work", placeholder: "weight, reps, or time" %>
+      <br>
+
+      <%= collection_select "workout[#{t}]", "skill_2", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
+      <%= text_field "workout[#{t}]", "skill_2_work", placeholder: "weight, reps, or time" %>
+      <br>
+
+      <%= collection_select "workout[#{t}]", "skill_3", Skill.for_target(t), :id, :name, multiple: true, include_blank: true %>
+      <%= text_field "workout[#{t}]", "skill_3_work", placeholder: "weight, reps, or time"%>
+      <br><br>
+
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Publish Workout" %>
+    </div>
 
 
-<% end %>
+  <% end %>
+</div>
