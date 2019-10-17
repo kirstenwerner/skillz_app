@@ -24,6 +24,10 @@ class AthletesController < ApplicationController
     else
       redirect_to root_path, alert: "You may only view your own workout records"
     end
+    respond_to do |f|
+      f.html {render :show}
+      f.json {render json: @workouts}
+    end
   end
 
   def destroy
