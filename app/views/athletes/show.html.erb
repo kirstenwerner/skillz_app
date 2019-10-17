@@ -1,9 +1,14 @@
 <h1>Welcome back, <%= @athlete.first_name %>!</h1>
 
-<h3>Here's the workouts that you've logged:</h3>
+<h3>Here's the workouts that you've logged:</h3><br>
+
+<div id="workout-show"></div>
+</div><br>
 
 <ul>
   <% @workouts.each do |workout| %>
-    <%= link_to workout.date, athlete_workout_path(@athlete.id, workout.id) %><br />
+  <div id="workout-<%= workout.id %>">
+    <p><%= workout.date %> <button class="workout-js" data-id="<%= workout.id %>">See Workout</button></p>
+  </div>
   <% end %>
 </ul>
